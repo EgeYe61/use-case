@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-app
+  template:
+    metadata:
+      labels:
+        app: example-app
+    spec:
+      nodeSelector:
+        pool: application # Burada application-pool node pool etiketini kullandık
+      tolerations:
+        - key: "pool"
+          operator: "Equal"
+          value: "application"
+          effect: "NoSchedule"
+      containers:
+        - name: example-app
+          image: your-docker-image
+          ports:
+            - containerPort: 8080
