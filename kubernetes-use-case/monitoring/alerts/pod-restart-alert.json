@@ -1,0 +1,11 @@
+{
+    "annotations": {
+        "summary": "Pod Restart Alert"
+    },
+    "expr": "increase(kube_pod_container_status_restarts_total[5m]) > 0",
+    "for": "1m",
+    "labels": {
+        "severity": "warning"
+    },
+    "alert": "PodRestartDetected"
+}
